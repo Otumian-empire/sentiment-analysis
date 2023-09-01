@@ -1,0 +1,125 @@
+2023-08-29 14:05:13.517082: I tensorflow/tsl/cuda/cudart_stub.cc:28] Could not find cuda drivers on your machine, GPU will not be used.
+2023-08-29 14:05:13.572536: I tensorflow/tsl/cuda/cudart_stub.cc:28] Could not find cuda drivers on your machine, GPU will not be used.
+2023-08-29 14:05:13.573010: I tensorflow/core/platform/cpu_feature_guard.cc:182] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2023-08-29 14:05:14.393992: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT
+Load article DataSet
+index text processed_text sentiment
+0 0 Hey y'all 👋Hope you all have wonderful weekend... NaN NaN
+1 1 Do you actively contribute to open source proj... NaN NaN
+2 2 Open Source thrives through shared efforts. Wh... NaN NaN
+3 3 In the age of burgeoning data complexity and h... NaN NaN
+4 4 We're thrilled to announce a powerful integrat... NaN NaN
+Clean data set
+index text processed_text sentiment
+0 0 Hey y'all 👋Hope you all have wonderful weekend... hey hope wonderful weekends looking back past ... positive
+1 1 Do you actively contribute to open source proj... actively contribute open source projects motiv... positive
+2 2 Open Source thrives through shared efforts. Wh... open source thrives shared efforts whether new... positive
+3 3 In the age of burgeoning data complexity and h... age burgeoning data complexity high dimensiona... positive
+4 4 We're thrilled to announce a powerful integrat... thrilled announce powerful integration langcha... positive
+majority class before upsample: (909, 4)
+minority class before upsample: (66, 4)
+After upsampling
+sentiment
+positive 909
+negative 909
+Name: count, dtype: int64
+(800,) (200,) (800,) (200,)
+Vocabulary size=19029
+Number of Documents=800
+(800, 30) (200, 30)
+Model: "sequential"
+
+---
+
+# Layer (type) Output Shape Param #
+
+embedding (Embedding) (None, 30, 100) 1903000
+
+dense (Dense) (None, 30, 3) 303
+
+conv1d (Conv1D) (None, 16, 256) 11776
+
+max_pooling1d (MaxPooling1 (None, 8, 256) 0  
+ D)
+
+dropout (Dropout) (None, 8, 256) 0
+
+dense_1 (Dense) (None, 8, 16) 4112
+
+dropout_1 (Dropout) (None, 8, 16) 0
+
+dense_2 (Dense) (None, 8, 16) 272
+
+dropout_2 (Dropout) (None, 8, 16) 0
+
+global_max_pooling1d (Glob (None, 16) 0  
+ alMaxPooling1D)
+
+dense_3 (Dense) (None, 1) 17
+
+=================================================================
+Total params: 1919480 (7.32 MB)
+Trainable params: 1919480 (7.32 MB)
+Non-trainable params: 0 (0.00 Byte)
+
+---
+
+Epoch 1/10
+4/4 [==============================] - ETA: 0s - loss: 0.7475 - accuracy: 0.0213
+Epoch 1: val_accuracy improved from -inf to 0.00500, saving model to ./best_model/best_model_cnn1d.h5
+4/4 [==============================] - 2s 226ms/step - loss: 0.7475 - accuracy: 0.0213 - val_loss: 0.7300 - val_accuracy: 0.0050
+Epoch 2/10
+3/4 [=====================>........] - ETA: 0s - loss: 0.7208 - accuracy: 0.0195
+Epoch 2: val_accuracy did not improve from 0.00500
+4/4 [==============================] - 0s 49ms/step - loss: 0.7204 - accuracy: 0.0188 - val_loss: 0.7165 - val_accuracy: 0.0050
+Epoch 3/10
+3/4 [=====================>........] - ETA: 0s - loss: 0.7037 - accuracy: 0.0247
+Epoch 3: val_accuracy did not improve from 0.00500
+4/4 [==============================] - 0s 51ms/step - loss: 0.7039 - accuracy: 0.0250 - val_loss: 0.7031 - val_accuracy: 0.0050
+Epoch 4/10
+3/4 [=====================>........] - ETA: 0s - loss: 0.6838 - accuracy: 0.0312
+Epoch 4: val_accuracy improved from 0.00500 to 0.08500, saving model to ./best_model/best_model_cnn1d.h5
+4/4 [==============================] - 0s 111ms/step - loss: 0.6833 - accuracy: 0.0312 - val_loss: 0.6914 - val_accuracy: 0.0850
+Epoch 5/10
+3/4 [=====================>........] - ETA: 0s - loss: 0.6794 - accuracy: 0.0352
+Epoch 5: val_accuracy did not improve from 0.08500
+4/4 [==============================] - 0s 52ms/step - loss: 0.6794 - accuracy: 0.0338 - val_loss: 0.6802 - val_accuracy: 0.0850
+Epoch 6/10
+3/4 [=====================>........] - ETA: 0s - loss: 0.6589 - accuracy: 0.0378
+Epoch 6: val_accuracy did not improve from 0.08500
+4/4 [==============================] - 0s 50ms/step - loss: 0.6600 - accuracy: 0.0388 - val_loss: 0.6686 - val_accuracy: 0.0850
+Epoch 7/10
+4/4 [==============================] - ETA: 0s - loss: 0.6452 - accuracy: 0.0463
+Epoch 7: val_accuracy did not improve from 0.08500
+4/4 [==============================] - 0s 52ms/step - loss: 0.6452 - accuracy: 0.0463 - val_loss: 0.6571 - val_accuracy: 0.0850
+Epoch 8/10
+3/4 [=====================>........] - ETA: 0s - loss: 0.6290 - accuracy: 0.0560
+Epoch 8: val_accuracy did not improve from 0.08500
+4/4 [==============================] - 0s 50ms/step - loss: 0.6280 - accuracy: 0.0538 - val_loss: 0.6465 - val_accuracy: 0.0850
+Epoch 9/10
+3/4 [=====================>........] - ETA: 0s - loss: 0.6163 - accuracy: 0.0521
+Epoch 9: val_accuracy did not improve from 0.08500
+4/4 [==============================] - 0s 51ms/step - loss: 0.6166 - accuracy: 0.0525 - val_loss: 0.6397 - val_accuracy: 0.0850
+Epoch 10/10
+4/4 [==============================] - ETA: 0s - loss: 0.6025 - accuracy: 0.0463
+Epoch 10: val_accuracy did not improve from 0.08500
+4/4 [==============================] - 0s 57ms/step - loss: 0.6025 - accuracy: 0.0463 - val_loss: 0.6346 - val_accuracy: 0.0850
+25/25 [==============================] - 0s 3ms/step - loss: 0.6913 - accuracy: 0.0562
+7/7 [==============================] - 0s 4ms/step - loss: 0.6914 - accuracy: 0.0850
+Train: 5.624999850988388, Test: 8.500000089406967
+================================================
+
+7/7 [==============================] - 0s 3ms/step
+
+              precision    recall  f1-score   support
+
+           0       0.00      0.00      0.00         1
+           1       0.09      1.00      0.16        17
+           2       0.00      0.00      0.00         3
+           3       0.00      0.00      0.00       179
+
+    accuracy                           0.09       200
+
+macro avg 0.02 0.25 0.04 200
+weighted avg 0.01 0.09 0.01 200
